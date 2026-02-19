@@ -15,7 +15,7 @@ Before you begin, ensure you have the following installed on your laptop:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-org/arcas-platform.git
+git clone https://github.com/DarleneQing/arcas-platform.git
 cd arcas-platform
 ```
 
