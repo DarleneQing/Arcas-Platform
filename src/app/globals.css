@@ -1,26 +1,178 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand-50: #EBF0F7;
+  --color-brand-100: #D1DEEE;
+  --color-brand-200: #A3BDD8;
+  --color-brand-300: #759CC2;
+  --color-brand-400: #4A7DB0;
+  --color-brand-500: #1E5A96;
+  --color-brand-600: #164478;
+  --color-brand-700: #0F2C59;
+  --color-brand-800: #0A1E3D;
+  --color-brand-900: #051021;
+
+  --color-primary: #137fec;
+
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #f6f7f8;
+  --bg-sidebar: #FFFFFF;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-tertiary: #94a3b8;
+  --border: #e2e8f0;
+  --accent: #0F2C50;
+  --accent-hover: #1A3F7A;
+  --accent-light: #EBF0F7;
+  --primary: #137fec;
+  --user-msg-bg: #f8fafc;
+  --user-msg-text: #1e293b;
+  --ai-msg-bg: transparent;
+  --ai-msg-text: #1e293b;
+  --warning-bg: #FFFBEB;
+  --warning-border: #F59E0B;
+  --warning-text: #92400E;
+  --success-bg: #ECFDF5;
+  --success-text: #065F46;
+  --error-bg: #FEF2F2;
+  --error-text: #991B1B;
+  --ring: #137fec;
+}
+
+.dark {
+  --bg-primary: #101922;
+  --bg-secondary: #1a2332;
+  --bg-sidebar: #0f1923;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #475569;
+  --border: #1e293b;
+  --accent: #137fec;
+  --accent-hover: #3b9bff;
+  --accent-light: #1e293b;
+  --primary: #137fec;
+  --user-msg-bg: rgba(30, 41, 59, 0.5);
+  --user-msg-text: #e2e8f0;
+  --ai-msg-bg: transparent;
+  --ai-msg-text: #e2e8f0;
+  --warning-bg: #3D3000;
+  --warning-border: #F59E0B;
+  --warning-text: #FDE68A;
+  --success-bg: #052E16;
+  --success-text: #A7F3D0;
+  --error-bg: #450A0A;
+  --error-text: #FCA5A5;
+  --ring: #137fec;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* Focus ring utility */
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Prose styling for markdown */
+.prose-custom h1, .prose-custom h2, .prose-custom h3 {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+.prose-custom h1 { font-size: 1.5em; }
+.prose-custom h2 { font-size: 1.25em; }
+.prose-custom h3 { font-size: 1.1em; }
+.prose-custom p {
+  margin-bottom: 0.75em;
+  line-height: 1.7;
+}
+.prose-custom ul, .prose-custom ol {
+  margin-bottom: 0.75em;
+  padding-left: 1.5em;
+}
+.prose-custom li {
+  margin-bottom: 0.25em;
+  line-height: 1.6;
+}
+.prose-custom code {
+  background: var(--bg-secondary);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+  font-family: var(--font-mono), monospace;
+}
+.prose-custom pre {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1em;
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+.prose-custom pre code {
+  background: transparent;
+  padding: 0;
+}
+.prose-custom blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1em;
+  margin-left: 0;
+  margin-bottom: 0.75em;
+  color: var(--text-secondary);
+}
+.prose-custom a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+.prose-custom table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+.prose-custom th, .prose-custom td {
+  border: 1px solid var(--border);
+  padding: 0.5em 0.75em;
+  text-align: left;
+}
+.prose-custom th {
+  background: var(--bg-secondary);
+  font-weight: 600;
 }
